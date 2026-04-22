@@ -1,0 +1,75 @@
+import { JwtService } from '@nestjs/jwt';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { Friendship } from '../friend/entities/friend.entity';
+export declare class UserService {
+    private userRepo;
+    private friendshipRepo;
+    private jwtService;
+    constructor(userRepo: Repository<User>, friendshipRepo: Repository<Friendship>, jwtService: JwtService);
+    login(email: string, password: string): Promise<User | null>;
+    getMe(authorizationHeader?: string): Promise<{
+        avatar_url: string;
+        bio: string;
+        gender: number | null;
+        hometown: string | null;
+        post_count: any;
+        follower_count: any;
+        following_count: any;
+        created_at: Date;
+        createAt: Date;
+        friendship_id: string | null;
+        friendship_status: string | null;
+        friendship_requested_by_me: boolean;
+        email?: string | undefined;
+        id: string;
+        slug: string;
+        username: string;
+    }>;
+    getPublicProfile(userSlug: string, authorizationHeader?: string): Promise<{
+        avatar_url: string;
+        bio: string;
+        gender: number | null;
+        hometown: string | null;
+        post_count: any;
+        follower_count: any;
+        following_count: any;
+        created_at: Date;
+        createAt: Date;
+        friendship_id: string | null;
+        friendship_status: string | null;
+        friendship_requested_by_me: boolean;
+        email?: string | undefined;
+        id: string;
+        slug: string;
+        username: string;
+    }>;
+    updateMe(authorizationHeader: string | undefined, body: UpdateUserDto): Promise<{
+        avatar_url: string;
+        bio: string;
+        gender: number | null;
+        hometown: string | null;
+        post_count: any;
+        follower_count: any;
+        following_count: any;
+        created_at: Date;
+        createAt: Date;
+        friendship_id: string | null;
+        friendship_status: string | null;
+        friendship_requested_by_me: boolean;
+        email?: string | undefined;
+        id: string;
+        slug: string;
+        username: string;
+    }>;
+    searchUsers(query?: string, authorizationHeader?: string): Promise<{
+        id: string;
+        slug: string;
+        username: string;
+        avatar_url: string;
+        bio: string;
+    }[]>;
+    private resolveUserFromAuthorization;
+    private buildProfileResponse;
+}
