@@ -15,13 +15,14 @@ const user_entity_1 = require("./entities/user.entity");
 const typeorm_module_1 = require("@nestjs/typeorm/dist/typeorm.module");
 const auth_constants_1 = require("../auth/auth.constants");
 const friend_entity_1 = require("../friend/entities/friend.entity");
+const follow_entity_1 = require("../follow/entities/follow.entity");
 let UserModule = class UserModule {
 };
 exports.UserModule = UserModule;
 exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_module_1.TypeOrmModule.forFeature([user_entity_1.User, friend_entity_1.Friendship]),
+            typeorm_module_1.TypeOrmModule.forFeature([user_entity_1.User, friend_entity_1.Friendship, follow_entity_1.Follow]),
             jwt_1.JwtModule.register({
                 secret: auth_constants_1.AUTH_JWT_SECRET,
                 signOptions: { expiresIn: '7d' },

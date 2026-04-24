@@ -6,10 +6,11 @@ import { User } from './entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
 import { AUTH_JWT_SECRET } from '../auth/auth.constants';
 import { Friendship } from '../friend/entities/friend.entity';
+import { Follow } from '../follow/entities/follow.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Friendship]),
+    TypeOrmModule.forFeature([User, Friendship, Follow]),
     JwtModule.register({
       secret: AUTH_JWT_SECRET,
       signOptions: { expiresIn: '7d' },

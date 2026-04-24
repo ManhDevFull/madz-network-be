@@ -16,6 +16,7 @@ const post_module_1 = require("./modules/post/post.module");
 const user_module_1 = require("./modules/user/user.module");
 const auth_module_1 = require("./modules/auth/auth.module");
 const friend_module_1 = require("./modules/friend/friend.module");
+const follow_module_1 = require("./modules/follow/follow.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -43,6 +44,7 @@ exports.AppModule = AppModule = __decorate([
             user_module_1.UserModule,
             auth_module_1.AuthModule,
             friend_module_1.FriendModule,
+            follow_module_1.FollowModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

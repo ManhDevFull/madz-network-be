@@ -10,6 +10,7 @@ import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Friendship } from '../friend/entities/friend.entity';
+import { Follow } from '../follow/entities/follow.entity';
 
 @Injectable()
 export class UserService {
@@ -18,6 +19,8 @@ export class UserService {
     private userRepo: Repository<User>,
     @InjectRepository(Friendship)
     private friendshipRepo: Repository<Friendship>,
+    @InjectRepository(Follow)
+    private followRepo: Repository<Follow>,
     private jwtService: JwtService,
   ) { }
 
@@ -195,6 +198,15 @@ export class UserService {
         })
       : null;
 
+    const follow = currentUser
+      ? await this.followRepo.findOne({
+          where: {
+            follower_id: currentUser.id,
+            following_id: user.id,
+          },
+        })
+      : null;
+
     return {
       id: user.id,
       slug: user.slug,
@@ -214,6 +226,7 @@ export class UserService {
       friendship_requested_by_me: Boolean(
         currentUser && friendship && friendship.requester_id === currentUser.id,
       ),
+      is_following: currentUser ? Boolean(follow) : null,
     };
   }
 }

@@ -20,6 +20,7 @@ export declare class UserController {
         friendship_id: string | null;
         friendship_status: string | null;
         friendship_requested_by_me: boolean;
+        is_following: boolean | null;
         email?: string | undefined;
         id: string;
         slug: string;
@@ -45,6 +46,7 @@ export declare class UserController {
         friendship_id: string | null;
         friendship_status: string | null;
         friendship_requested_by_me: boolean;
+        is_following: boolean | null;
         email?: string | undefined;
         id: string;
         slug: string;
@@ -63,6 +65,7 @@ export declare class UserController {
         friendship_id: string | null;
         friendship_status: string | null;
         friendship_requested_by_me: boolean;
+        is_following: boolean | null;
         email?: string | undefined;
         id: string;
         slug: string;

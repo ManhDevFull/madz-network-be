@@ -3,11 +3,13 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Friendship } from '../friend/entities/friend.entity';
+import { Follow } from '../follow/entities/follow.entity';
 export declare class UserService {
     private userRepo;
     private friendshipRepo;
+    private followRepo;
     private jwtService;
-    constructor(userRepo: Repository<User>, friendshipRepo: Repository<Friendship>, jwtService: JwtService);
+    constructor(userRepo: Repository<User>, friendshipRepo: Repository<Friendship>, followRepo: Repository<Follow>, jwtService: JwtService);
     login(email: string, password: string): Promise<User | null>;
     getMe(authorizationHeader?: string): Promise<{
         avatar_url: string;
@@ -22,6 +24,7 @@ export declare class UserService {
         friendship_id: string | null;
         friendship_status: string | null;
         friendship_requested_by_me: boolean;
+        is_following: boolean | null;
         email?: string | undefined;
         id: string;
         slug: string;
@@ -40,6 +43,7 @@ export declare class UserService {
         friendship_id: string | null;
         friendship_status: string | null;
         friendship_requested_by_me: boolean;
+        is_following: boolean | null;
         email?: string | undefined;
         id: string;
         slug: string;
@@ -58,6 +62,7 @@ export declare class UserService {
         friendship_id: string | null;
         friendship_status: string | null;
         friendship_requested_by_me: boolean;
+        is_following: boolean | null;
         email?: string | undefined;
         id: string;
         slug: string;

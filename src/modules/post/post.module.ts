@@ -11,6 +11,7 @@ import { AUTH_JWT_SECRET } from '../auth/auth.constants';
     TypeOrmModule.forFeature([Post]),
     JwtModule.register({
       secret: AUTH_JWT_SECRET,
+      signOptions: { expiresIn: '7d' },
     }),
   ],
   providers: [PostService],

@@ -6,28 +6,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostModule = void 0;
+exports.FollowModule = void 0;
 const common_1 = require("@nestjs/common");
-const jwt_1 = require("@nestjs/jwt");
+const follow_service_1 = require("./follow.service");
+const follow_controller_1 = require("./follow.controller");
 const typeorm_1 = require("@nestjs/typeorm");
-const post_entity_1 = require("./post.entity");
-const post_service_1 = require("./post.service");
-const post_controller_1 = require("./post.controller");
+const follow_entity_1 = require("./entities/follow.entity");
+const jwt_1 = require("@nestjs/jwt");
 const auth_constants_1 = require("../auth/auth.constants");
-let PostModule = class PostModule {
+let FollowModule = class FollowModule {
 };
-exports.PostModule = PostModule;
-exports.PostModule = PostModule = __decorate([
+exports.FollowModule = FollowModule;
+exports.FollowModule = FollowModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([post_entity_1.Post]),
+            typeorm_1.TypeOrmModule.forFeature([follow_entity_1.Follow]),
             jwt_1.JwtModule.register({
                 secret: auth_constants_1.AUTH_JWT_SECRET,
                 signOptions: { expiresIn: '7d' },
             }),
         ],
-        providers: [post_service_1.PostService],
-        controllers: [post_controller_1.PostController],
+        controllers: [follow_controller_1.FollowController],
+        providers: [follow_service_1.FollowService],
     })
-], PostModule);
-//# sourceMappingURL=post.module.js.map
+], FollowModule);
+//# sourceMappingURL=follow.module.js.map

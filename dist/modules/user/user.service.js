@@ -19,13 +19,16 @@ const typeorm_1 = require("typeorm");
 const user_entity_1 = require("./entities/user.entity");
 const typeorm_2 = require("@nestjs/typeorm");
 const friend_entity_1 = require("../friend/entities/friend.entity");
+const follow_entity_1 = require("../follow/entities/follow.entity");
 let UserService = class UserService {
     userRepo;
     friendshipRepo;
+    followRepo;
     jwtService;
-    constructor(userRepo, friendshipRepo, jwtService) {
+    constructor(userRepo, friendshipRepo, followRepo, jwtService) {
         this.userRepo = userRepo;
         this.friendshipRepo = friendshipRepo;
+        this.followRepo = followRepo;
         this.jwtService = jwtService;
     }
     async login(email, password) {
@@ -157,6 +160,14 @@ let UserService = class UserService {
                 ],
             })
             : null;
+        const follow = currentUser
+            ? await this.followRepo.findOne({
+                where: {
+                    follower_id: currentUser.id,
+                    following_id: user.id,
+                },
+            })
+            : null;
         return {
             id: user.id,
             slug: user.slug,
@@ -174,6 +185,7 @@ let UserService = class UserService {
             friendship_id: friendship?.id ?? null,
             friendship_status: resolveFriendshipStatus(currentUser, user, friendship),
             friendship_requested_by_me: Boolean(currentUser && friendship && friendship.requester_id === currentUser.id),
+            is_following: currentUser ? Boolean(follow) : null,
         };
     }
 };
@@ -182,7 +194,9 @@ exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_2.InjectRepository)(user_entity_1.User)),
     __param(1, (0, typeorm_2.InjectRepository)(friend_entity_1.Friendship)),
+    __param(2, (0, typeorm_2.InjectRepository)(follow_entity_1.Follow)),
     __metadata("design:paramtypes", [typeorm_1.Repository,
+        typeorm_1.Repository,
         typeorm_1.Repository,
         jwt_1.JwtService])
 ], UserService);
