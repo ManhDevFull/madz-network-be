@@ -9,7 +9,7 @@ async function bootstrap() {
     app.enableCors({
         origin: process.env.FRONTEND_ORIGIN ?? 'http://localhost:3000',
     });
-    await app.listen(process.env.PORT ?? 3001);
+    await app.listen(process.env.PORT ?? 3001, '0.0.0.0');
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
